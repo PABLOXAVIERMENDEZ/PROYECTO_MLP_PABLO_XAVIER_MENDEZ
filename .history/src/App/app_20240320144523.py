@@ -34,7 +34,7 @@ def user(name):
 @app.route('/predict', methods=['POST'])
 def predict():
     data = request.json
-    Fecha = data.get('Ingresar fecha')
+    Fecha = float(data.get('Ingresar fecha'))
     
     prediction = model.predict([ [Fecha]])
 

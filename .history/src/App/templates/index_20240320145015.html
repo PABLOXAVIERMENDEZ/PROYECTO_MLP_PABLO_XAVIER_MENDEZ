@@ -52,8 +52,9 @@
             window.location.href = '/user/' + prompt('Ingresa tu nombre');
         }
 
-        var fecha = prompt('Ingresa la fecha en formato YYYY-MM-DD');
-            var DATE = fecha;
+        function predict() {
+            var DATE = parseFloat(prompt('DATE'));
+            
 
             // Realizar una solicitud POST a la ruta '/predict' de tu aplicación Flask
             fetch('/predict', {
@@ -61,7 +62,7 @@
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({DATE:DATE })
+                body: JSON.stringify({DATE:DATE})
             })
             .then(response => response.text())
             .then(data => {

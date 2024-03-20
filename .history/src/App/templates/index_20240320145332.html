@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Estimación_de_demanda</title>
+    <title>Estimación de demanda</title>
     <style>
         body {
             background-image: url('https://img.freepik.com/vetores-gratis/design-de-agente-de-call-center-em-estilo-simples_23-2147939274.jpg?size=338&ext=jpg&ga=GA1.1.1412446893.1704412800&semt=ais');
@@ -42,7 +42,7 @@
 <body>
     <div class="texto-fondo">
         <h1>Estimación de demanda</h1>
-        <p>¡Hola! esta app te indica cuantos agentes requieres para atender el volumen de llamados</p>
+        <p>¡Hola! Esta app te indica cuántos agentes requieres para atender el volumen de llamados.</p>
         <p>Selecciona una opción:</p>
         <button id="botonSaludar" onclick="user()">Cantidad</button>
         <button id="botonPrediccion" onclick="predict()">Ingresar la fecha</button>
@@ -52,7 +52,8 @@
             window.location.href = '/user/' + prompt('Ingresa tu nombre');
         }
 
-        var fecha = prompt('Ingresa la fecha en formato YYYY-MM-DD');
+        function predict() {
+            var fecha = prompt('Ingresa la fecha en formato YYYY-MM-DD');
             var DATE = fecha;
 
             // Realizar una solicitud POST a la ruta '/predict' de tu aplicación Flask
@@ -61,7 +62,7 @@
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({DATE:DATE })
+                body: JSON.stringify({DATE:DATE})
             })
             .then(response => response.text())
             .then(data => {

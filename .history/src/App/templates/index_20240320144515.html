@@ -52,8 +52,17 @@
             window.location.href = '/user/' + prompt('Ingresa tu nombre');
         }
 
-        var fecha = prompt('Ingresa la fecha en formato YYYY-MM-DD');
-            var DATE = fecha;
+        function predict() {
+            var Pclass_1 = parseFloat(prompt('Pclass1'));
+            var Pclass_2 = parseFloat(prompt('Pclass2'));
+            var Pclass_3 = parseFloat(prompt('Pclass3'));
+            var is_male = parseInt(prompt('is_male'));
+            var Embarked_C = parseFloat(prompt('Embarked_C'))
+            var Embarked_Q = parseFloat(prompt('Embarked_Q'))
+            var Embarked_S = parseFloat(prompt('Embarked_S'))
+            var Age = parseFloat(prompt('Age'));
+            var Fare = parseFloat(prompt('Fare'));
+            var Acompaniantes= parseInt(prompt('Acompaniantes'));
 
             // Realizar una solicitud POST a la ruta '/predict' de tu aplicación Flask
             fetch('/predict', {
@@ -61,7 +70,7 @@
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({DATE:DATE })
+                body: JSON.stringify({Pclass_1 : Pclass_1,Pclass_2 : Pclass_2, Pclass_3 : Pclass_3, is_male: is_male,Embarked_C:Embarked_C,Embarked_Q:Embarked_Q,Embarked_S:Embarked_S, Age: Age, Fare:Fare, Acompaniantes : Acompaniantes})
             })
             .then(response => response.text())
             .then(data => {
