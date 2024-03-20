@@ -28,8 +28,6 @@ def predict():
      
     
     fecha_numerica = np.array([[fecha_datetime.year, fecha_datetime.month, fecha_datetime.day]])
-
-    fecha_numerica = fecha_numerica.reshape(-1, 1)
     
     
     # Realizar la predicción con tu modelo

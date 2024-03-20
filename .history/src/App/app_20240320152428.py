@@ -2,7 +2,6 @@ from flask import Flask, request, render_template
 import pickle
 import os
 import numpy as np
-from datetime import datetime
 
 os.chdir(os.path.dirname(__file__))
 print(os.getcwd())
@@ -24,13 +23,8 @@ def predict():
     data = request.json
     Fecha = data.get('Ingresar fecha')
     
-    fecha_datetime = datetime.strptime(Fecha, '%Y-%m-%d')
-     
-    
-    fecha_numerica = np.array([[fecha_datetime.year, fecha_datetime.month, fecha_datetime.day]])
-
-    fecha_numerica = fecha_numerica.reshape(-1, 1)
-    
+    year, month, day = map(int, Fecha.split('-'))
+    fecha_numerica = [year, month, day]
     
     # Realizar la predicción con tu modelo
     prediction = model.predict([fecha_numerica])

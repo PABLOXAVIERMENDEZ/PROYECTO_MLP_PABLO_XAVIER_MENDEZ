@@ -25,11 +25,9 @@ def predict():
     Fecha = data.get('Ingresar fecha')
     
     fecha_datetime = datetime.strptime(Fecha, '%Y-%m-%d')
-     
-    
-    fecha_numerica = np.array([[fecha_datetime.year, fecha_datetime.month, fecha_datetime.day]])
 
-    fecha_numerica = fecha_numerica.reshape(-1, 1)
+     # Convertir la fecha en una matriz 2D
+    fecha_numerica = np.array([fecha_datetime]).reshape(1, -1)
     
     
     # Realizar la predicción con tu modelo
