@@ -1,6 +1,8 @@
+import numpy as np
 from flask import Flask, request, render_template
 import pickle
 import os
+from datetime import datetime
 
 os.chdir(os.path.dirname(__file__))
 print(os.getcwd())
@@ -20,11 +22,15 @@ def user(name):
 @app.route('/predict', methods=['POST'])
 def predict():
     data = request.json
+    fecha = data.get('Ingresar fecha')
     const = float(data.get('Ingresar valor de la constante'))
     trend = float(data.get('Ingresar valor de la tendencia'))
 
+    fecha_datetime = datetime.strptime(fecha, '%Y-%m-%d')
+    fecha_numerica = np.array([[fecha_datetime.year, fecha_datetime.month, fecha_datetime.day, const, trend]])
+
     # Realizar la predicción con tu modelo
-    prediction = model.predict([[const, trend]])
+    prediction = model.predict(fecha_numerica)
     # Convertir la predicción a un mensaje legible
     prediction_message = str(prediction)
 
