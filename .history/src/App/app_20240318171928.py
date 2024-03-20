@@ -5,26 +5,18 @@ import os
 os.chdir(os.path.dirname(__file__))
 print(os.getcwd())
 
-import pickle
-
-# Cargar el modelo desde el archivo pickle
-with open('modelo.pkl', 'rb') as f:
-    model = pickle.load(f)
-
 #model = pickle.load(open('C:/Users/Lucia/Desktop/bootcamp/DS_PT_09_2023/Data_Engineer/Docker/App/best_model.pkl', 'rb'))
-#model = pickle.load(open('modelo.pkl', 'rb'))
+model = pickle.load(open('/app/best_model.pkl', 'rb'))
 
-print(model)
-'''
-#dic_target = {0:"NO SOBREVIVE ❌😥",
+dic_target = {0:"NO SOBREVIVE ❌😥",
               1:"SOBREVIVE🤩"}
 
 print(model)
 
-#app = Flask(__name__)
+app = Flask(__name__)
 
-#@app.route('/', methods=['GET'])
-#def home():
+@app.route('/', methods=['GET'])
+def home():
     return render_template('index.html')
 
 @app.route('/user/<name>', methods=['GET'])
@@ -57,4 +49,3 @@ def predict():
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port=5000)
-    '''
