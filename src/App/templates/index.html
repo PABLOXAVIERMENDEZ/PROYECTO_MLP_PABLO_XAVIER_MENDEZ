@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sobrevivientes Titanic</title>
+    <style>
+        body {
+            background-image: url('https://peru21.pe/resizer/YUhN_OEmYItVS_wi8weCNHQE_8M=/1200x800/smart/filters:format(jpeg):quality(75)/arc-anglerfish-arc2-prod-elcomercio.s3.amazonaws.com/public/TFVXQHIEEVCR3INDDATCTTOXVY.jpg');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            font-family: Arial, sans-serif;
+            color: rgb(247, 243, 243);
+            text-align: center;
+            padding: 50px;
+        }
+        .texto-fondo {
+            background-color: rgba(0, 0, 0, 0.5); /* Fondo semitransparente */
+            padding: 20px;
+            border-radius: 10px;
+        }
+        h1 {
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+        #botonSaludar, #botonPrediccion {
+            padding: 10px 20px;
+            margin: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            background-color: #4CAF50;
+            color: white;
+            font-size: 16px;
+        }
+        #botonSaludar:hover, #botonPrediccion:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="texto-fondo">
+        <h1>Sobrevivientes titanic</h1>
+        <p>¡Hola! esta app te indica si sobrevive o no un pasajero de titanic.</p>
+        <p>Selecciona una opción:</p>
+        <button id="botonSaludar" onclick="user()">Datos</button>
+        <button id="botonPrediccion" onclick="predict()">Hacer Predicción</button>
+    </div>
+    <script>
+        function user() {
+            window.location.href = '/user/' + prompt('Ingresa tu nombre');
+        }
+
+        function predict() {
+            var Pclass_1 = parseFloat(prompt('Pclass1'));
+            var Pclass_2 = parseFloat(prompt('Pclass2'));
+            var Pclass_3 = parseFloat(prompt('Pclass3'));
+            var is_male = parseInt(prompt('is_male'));
+            var Embarked_C = parseFloat(prompt('Embarked_C'))
+            var Embarked_Q = parseFloat(prompt('Embarked_Q'))
+            var Embarked_S = parseFloat(prompt('Embarked_S'))
+            var Age = parseFloat(prompt('Age'));
+            var Fare = parseFloat(prompt('Fare'));
+            var Acompaniantes= parseInt(prompt('Acompaniantes'));
+
+            // Realizar una solicitud POST a la ruta '/predict' de tu aplicación Flask
+            fetch('/predict', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({Pclass_1 : Pclass_1,Pclass_2 : Pclass_2, Pclass_3 : Pclass_3, is_male: is_male,Embarked_C:Embarked_C,Embarked_Q:Embarked_Q,Embarked_S:Embarked_S, Age: Age, Fare:Fare, Acompaniantes : Acompaniantes})
+            })
+            .then(response => response.text())
+            .then(data => {
+                alert('La predicción es ' + data);
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        }
+    </script>
+</body>
+</html>
