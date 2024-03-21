@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estimación_de_demanda</title>
+    <style>
+        body {
+            background-image: url('https://img.freepik.com/vetores-gratis/design-de-agente-de-call-center-em-estilo-simples_23-2147939274.jpg?size=338&ext=jpg&ga=GA1.1.1412446893.1704412800&semt=ais');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            font-family: Arial, sans-serif;
+            color: rgb(247, 243, 243);
+            text-align: center;
+            padding: 50px;
+        }
+        .texto-fondo {
+            background-color: rgba(0, 0, 0, 0.5); /* Fondo semitransparente */
+            padding: 20px;
+            border-radius: 10px;
+        }
+        h1 {
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+        #botonSaludar, #botonPrediccion {
+            padding: 10px 20px;
+            margin: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            background-color: #4CAF50;
+            color: white;
+            font-size: 16px;
+        }
+        #botonSaludar:hover, #botonPrediccion:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="texto-fondo">
+        <h1>Estimación de demanda</h1>
+        <p>¡Hola! esta app te indica cuantos agentes requieres para atender el volumen de llamados</p>
+        <p>Selecciona una opción:</p>
+        <button id="botonSaludar" onclick="user()">Cantidad</button>
+        <button id="botonPrediccion">Ingresar la constante y la tendencia</button>
+        <br>
+        <label for="const">Valor de la constante:</label>
+        <input type="text" id="const" name="const">
+        <br>
+        <label for="trend">Valor de la tendencia:</label>
+        <input type="text" id="trend" name="trend">
+    </div>
+    <script>
+        function user() {
+            window.location.href = '/user/' + prompt('Ingresa tu nombre');
+        }
+
+        function predict() {
+            var DATE = parseInt(prompt('DATE'));
+            var constante = document.getElementById('const').value;
+            var tendencia = document.getElementById('trend').value;
+
+            // Realizar una solicitud POST a la ruta '/predict' de tu aplicación Flask
+            fetch('/predict', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({'Ingresar valor de la constante': constante, 'Ingresar valor de la tendencia': tendencia,'Ingresar fecha en formato YYYYMMDD': DATE})
+            })
+            .then(response => response.text())
+            .then(data => {
+                alert('La predicción es ' + data);
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        }
+
+        document.getElementById('botonPrediccion').addEventListener('click', predict);
+    </script>
+</body>
+</html>
