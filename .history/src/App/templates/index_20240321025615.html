@@ -24,7 +24,7 @@
             font-size: 36px;
             margin-bottom: 20px;
         }
-        #botonPrediccion {
+        #botonSaludar, #botonPrediccion {
             padding: 10px 20px;
             margin: 10px;
             border: none;
@@ -34,7 +34,7 @@
             color: white;
             font-size: 16px;
         }
-        #botonPrediccion:hover {
+        #botonSaludar:hover, #botonPrediccion:hover {
             background-color: #45a049;
         }
     </style>
@@ -45,6 +45,7 @@
         <p>¡Hola! esta app te indica cuantos agentes requieres para atender el volumen de llamados</p>
         <p>Selecciona una opción:</p>
         <button id="botonPrediccion">Ingresar la fecha</button>
+        <button id="botonSaludar" onclick="user()">Cantidad</button>
         <br>
         <label for="const">Valor de la constante:</label>
         <input type="text" id="const" name="const">
@@ -53,6 +54,10 @@
         <input type="text" id="trend" name="trend">
     </div>
     <script>
+        function user() {
+            window.location.href = '/user/' + prompt('Ingresa tu nombre');
+        }
+
         function predict() {
             var DATE = parseInt(prompt('DATE'));
             var constante = document.getElementById('const').value;
