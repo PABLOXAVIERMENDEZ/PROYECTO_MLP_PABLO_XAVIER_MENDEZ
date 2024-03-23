@@ -59,3 +59,60 @@ En una segunda verificación realizamos una búsqueda de llamados fuera del hora
 
 5.	Visualizaciones.
 Si bien se realizaron visualizaciones de los distintos análisis e hipótesis se visualizan todas juntas la ultima parte del EDA Visualizaciones 
+
+_______________________________________________________________________________________________________________________
+.	Modelo predictivo de machine learning
+
+Optimización de modelos operativos en Telecom: Análisis Profundo de los contactos para Mejorar el CX.
+En este proyecto, llevaremos a cabo un análisis exhaustivo de las interacciones de los clientes con Telecom. Nuestro objetivo es descubrir insights a partir de un análisis profundo de los datos, correlacionando los mismo buscamos desarrollar conclusiones significativas, que no solo logren esclarecer  patrones de comportamiento de los clientes, sino que también proporcionen orientación para mejorar la experiencia del cliente de manera significativa.**
+El objetivo preponderante es dimensionar la demanda en volumen de llamados mediante un modelo predictivo de series temporales con una regresion lineal.
+
+1. IMPORTACIÓN DE LIBRERIAS
+
+2. IMPORTACIÓN DEL DATASET
+
+3. CREACION DE UN NUEVO DATAFRAME CON EL DETALLE DE LA CANTIDAD DE LLAMADAS POR DÍA
+
+4. GENERACIÓN DEL INDEX 'time'
+
+5. GRAFICO DE LA CANTIDAD DE LLAMADAD DIARIAS & Tendencia
+
+6. MODELO :REALIZAMOS UN MODELO DE REGRESION LINEAL, ESCOGIMOS ESTAS VARIABLES PORQUE LA CANTIDAD DE LLAMADAS DIARIAS ES UN BUEN INDICADOR DE LA CARGA DE TRABAJO DEL CENTRO DE ATENCIÓN AL CLIENTE, Y LAS FECHAS PUEDEN INCLUIR INFORMACIÓN ESTACIONAL O DE TENDENCIAS A LO LARGO DEL TIEMPO.
+
+7.AÑADIMOS UN "LAG FEATURE" PARA CAPTURAR LA RELACIÓN ENTRE LA CANTIDAD DE LLAMADAS EN UN DÍA Y LA CANTIDAD DE LLAMADAS EN DÍAS ANTERIORES. ESTO PUEDE SER ÚTIL PARA IDENTIFICAR PATRONES O TENDENCIAS EN EL COMPORTAMIENTO DE LAS LLAMADAS, COMO POR EJEMPLO SI HAY UN INCREMENTO O DECREMENTO CONSISTENTE EN LA CANTIDAD DE LLAMADAS DESPUÉS DE CIERTOS DÍAS O EVENTOS. EL "LAG FEATURE" NOS PERMITE INCORPORAR ESTA INFORMACIÓN HISTÓRICA EN NUESTRO MODELO, LO QUE PODRÍA MEJORAR SU CAPACIDAD PARA PREDECIR LA CANTIDAD DE LLAMADAS FUTURAS
+
+8. ENTRENAMOS EL MODELO Y COMPARAMOS LA PREDICCIÓN VS LOS RESULTADOS REALES.
+
+9.APLICAMOS LAS MEDIAS MÓVILES, PARA AYUDAR A SUAVIZAR LA SERIE TEMPORAL AL PROMEDIAR LOS VALORES DE UN PERÍODO ESPECÍFICO, LO QUE PUEDE AYUDAR A RESALTAR TENDENCIAS O PATRONES SUBYACENTES EN LOS DATOS AL REDUCIR EL RUIDO O LA VARIABILIDAD ALEATORIA. AL APLICAR MEDIAS MÓVILES A LA SERIE TEMPORAL, SE PUEDEN IDENTIFICAR TENDENCIAS A LARGO PLAZO QUE PODRÍAN NO SER EVIDENTES EN LOS DATOS ORIGINALES. ESTO PUEDE AYUDAR A ENTENDER MEJOR LA DIRECCIÓN GENERAL DE LOS DATOS Y A DETECTAR POSIBLES CAMBIOS EN EL COMPORTAMIENTO A LO LARGO DEL TIEMPO
+
+10.APLICAMOS STATSMODELS PARA CREAR CARACTERÍSTICAS DETERMINÍSTICAS PARA LA SERIE TEMPORAL. EL BLOQUE DE CÓDIGO QUE PROPORCIONASTE PARECE ESTAR CREANDO CARACTERÍSTICAS PARA MODELAR LA TENDENCIA Y OTROS PATRONES EN LOS DATOS DE SERIES TEMPORALES
+
+11.ENTRENAMOS EL MODELO  DE REGRESIÓN LINEAL UTILIZANDO LAS CARACTERÍSTICAS DETERMINÍSTICAS CREADAS PREVIAMENTE Y LA VARIABLE OBJETIVO, Y LUEGO REALIZA PREDICCIONES UTILIZANDO ESTE MODELO.
+
+12.GRACIFAMOS LA TENDENCIA, CON EL FIN DE IDENTIFICAR SI ES AFIN A LOS GRAFICOS ANTERIORES.
+
+_______________________________________________________________________________________________________________________
+
+. PRODUCTIVIZACIÓN
+
+Se define una aplicación web Flask que utiliza un modelo de machine learning previamente entrenado para predecir la cantidad de llamadas telefónicas en una fecha específica. La aplicación permite al usuario ingresar una fecha, un valor de constante y un valor de tendencia, y luego utiliza estos datos como entrada para realizar una predicción con el modelo. La predicción se muestra al usuario en forma de un mensaje de alerta en la interfaz web.
+
+1.Definición de la aplicación Flask: El archivo app.py define una aplicación web Flask que maneja las solicitudes HTTP y las rutas correspondientes.
+
+2.Carga del modelo de machine learning: Se carga un modelo de machine learning previamente entrenado desde un archivo modelo.pkl.
+
+3.Rutas de la aplicación: Se definen tres rutas para la aplicación: la ruta raíz '/', la ruta 'user/<name>' y la ruta '/predict'.
+
+4. Ruta raíz y plantilla HTML: La ruta raíz devuelve una plantilla HTML (index.html) que contiene un formulario para ingresar la fecha y otros valores.
+
+5.Ruta '/predict' y función de predicción: La ruta '/predict' maneja las solicitudes POST enviadas desde el formulario. Extrae los datos ingresados por el usuario, realiza una predicción utilizando el modelo de machine learning y devuelve el resultado como texto.
+
+6.Interfaz web y JavaScript: La interfaz web (index.html) contiene un formulario para ingresar los datos y un script de JavaScript que captura los datos ingresados por el usuario, los envía al servidor Flask a través de una solicitud POST y muestra la respuesta de la predicción en un mensaje de alerta.
+
+7.Creación de un docker file con la instalación de dependencias: Se actualizan e instalan las dependencias necesarias, como el intérprete de Python y las herramientas de desarrollo.
+
+8.Copia de la aplicación: Se copia el código de la aplicación Flask al directorio de trabajo en el contenedor.
+
+9.Configuración de exposición de puerto y comando por defecto: Se establece el directorio de trabajo, se expone el puerto 5000 para acceder a la aplicación y se define el comando por defecto para ejecutar la aplicación Flask.
+
+10.Este Dockerfile proporciona un conjunto claro y conciso de instrucciones para crear y ejecutar el contenedor Docker que aloja la aplicación Flask.

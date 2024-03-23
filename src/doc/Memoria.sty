@@ -91,6 +91,28 @@ El objetivo preponderante es dimensionar la demanda en volumen de llamados media
 
 12.GRACIFAMOS LA TENDENCIA, CON EL FIN DE IDENTIFICAR SI ES AFIN A LOS GRAFICOS ANTERIORES.
 
-13.
+_______________________________________________________________________________________________________________________
 
-14.
+. PRODUCTIVIZACIÓN
+
+Se define una aplicación web Flask que utiliza un modelo de machine learning previamente entrenado para predecir la cantidad de llamadas telefónicas en una fecha específica. La aplicación permite al usuario ingresar una fecha, un valor de constante y un valor de tendencia, y luego utiliza estos datos como entrada para realizar una predicción con el modelo. La predicción se muestra al usuario en forma de un mensaje de alerta en la interfaz web.
+
+1.Definición de la aplicación Flask: El archivo app.py define una aplicación web Flask que maneja las solicitudes HTTP y las rutas correspondientes.
+
+2.Carga del modelo de machine learning: Se carga un modelo de machine learning previamente entrenado desde un archivo modelo.pkl.
+
+3.Rutas de la aplicación: Se definen tres rutas para la aplicación: la ruta raíz '/', la ruta 'user/<name>' y la ruta '/predict'.
+
+4. Ruta raíz y plantilla HTML: La ruta raíz devuelve una plantilla HTML (index.html) que contiene un formulario para ingresar la fecha y otros valores.
+
+5.Ruta '/predict' y función de predicción: La ruta '/predict' maneja las solicitudes POST enviadas desde el formulario. Extrae los datos ingresados por el usuario, realiza una predicción utilizando el modelo de machine learning y devuelve el resultado como texto.
+
+6.Interfaz web y JavaScript: La interfaz web (index.html) contiene un formulario para ingresar los datos y un script de JavaScript que captura los datos ingresados por el usuario, los envía al servidor Flask a través de una solicitud POST y muestra la respuesta de la predicción en un mensaje de alerta.
+
+7.Creación de un docker file con la instalación de dependencias: Se actualizan e instalan las dependencias necesarias, como el intérprete de Python y las herramientas de desarrollo.
+
+8.Copia de la aplicación: Se copia el código de la aplicación Flask al directorio de trabajo en el contenedor.
+
+9.Configuración de exposición de puerto y comando por defecto: Se establece el directorio de trabajo, se expone el puerto 5000 para acceder a la aplicación y se define el comando por defecto para ejecutar la aplicación Flask.
+
+10.Este Dockerfile proporciona un conjunto claro y conciso de instrucciones para crear y ejecutar el contenedor Docker que aloja la aplicación Flask.
